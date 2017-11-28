@@ -12,6 +12,43 @@
   </head>
 
   <body>
+    <script>
+/* The process called “bubbling”, is when events “bubble” from the inner element up
+ through parents like a bubble in the water. Much of the time, since we're listening for
+ very specific events, this doesn't matter our events can propagate up or down, and
+ they'll only trigger the event handler(s) that we want them to trigger. But sometimes,
+ as with these divs, we have a fairly generic event that we want to constrain to its
+ target. That's where stopPropagation comes in. */
+
+    const divs = document.querySelectorAll('div')
+
+    function bubble(e) {
+      // stop! that! propagation!
+      e.stopPropagation()
+
+      console.log(this.firstChild.nodeValue.trim() + ' bubbled')
+    }
+
+    for (let i = 0; i < divs.length; i++) {
+      divs[i].addEventListener('click', bubble)
+    }
+
+
+/* We've got a vendetta against the letter "g" (71), so we're going to prevent the input
+ from receiving "g"s. a preventDefault property — preventDefault is a function that, when
+ called, will prevent the, well, default event from taking place. It provides us an
+ opportunity to intercept and tweak user interactions  */
+
+    const input = document.querySelector('input')
+
+    input.addEventListener('keydown', function(e) {
+      if (e.which === 71) {
+        return e.preventDefault()
+      }
+    })
+
+    </script>
+
     <main id="main">My ID is "main"!</main>
 
     <br />
